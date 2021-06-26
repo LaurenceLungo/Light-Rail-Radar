@@ -6,6 +6,14 @@ function PlatformCard(props) {
     const platform = props.platform;
     const route_list = platform.route_list;
     const platform_id = platform.platform_id;
+
+    if (!route_list) {
+        return (
+            <Fragment>
+            <div>{platform_id}號月台</div>
+        </Fragment>
+        )
+    }
     return (
         <Fragment>
             <div>{platform_id}號月台</div>

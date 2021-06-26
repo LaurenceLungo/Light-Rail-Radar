@@ -21,7 +21,6 @@ function HomePage() {
     }, [station]);
 
     function selectHandler(e) {
-        console.log('aaa:', e.currentTarget.value)
         setStation(e.currentTarget.value);
     }
 
