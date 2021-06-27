@@ -1,47 +1,43 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import classes from "./homePage.module.css";
-import StationMenu from "../stationMenu/stationMenu";
+import Footer from "../footer/footer";
 import PlatformCard from "../platformCard/platformCard";
 import config from "../../config";
 
 function HomePage() {
-    const [isLoading, setIsLoading] = useState(true);
-    const [station, setStation] = useState(1);
-    const [eta, setEta] = useState([]);
+    const [station, setStation] = useState("unselected");
+    const [platformList, setPlatformList] = useState([]);
+    const [lastUpdatedTime, setLastUpdatedTime] = useState(null);
 
     useEffect(() => {
-        fetch(
-            `${config.etaURL}?station_id=${station}`
-        ).then(res => {
-            return res.json();
-        }).then(data => {
-            setEta(data);
-            setIsLoading(false);
-        });
+        if (station !== "unselected") {
+            fetch(
+                `${config.etaURL}?station_id=${station}`
+            ).then(res => {
+                return res.json();
+            }).then(data => {
+                setPlatformList(data.platform_list);
+                setLastUpdatedTime(data.system_time);
+            });
+        }
     }, [station]);
 
-    function selectHandler(e) {
-        setStation(e.currentTarget.value);
-    }
-
-    if (isLoading) {
-        return (
-            <section>
-                <p>loading...</p>
-            </section>
-        )
+    function selectHandler(station) {
+        console.log('set', station)
+        setStation(station);
     }
 
     return (
         <div>
-            {eta.system_time}
-            <br />
-            <StationMenu callback={selectHandler}/>
+            {lastUpdatedTime}
             <br />
             <br />
-            {eta.platform_list.map((val) =>
+            {platformList.map((val) =>
                 <PlatformCard key={val.platform_id} platform={val} />
             )}
+            <br />
+            <br />
+            <Footer callback={selectHandler} />
         </div>
     )
 }
