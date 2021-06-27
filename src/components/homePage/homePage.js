@@ -29,12 +29,13 @@ function HomePage() {
 
     return (
         <div>
-            {lastUpdatedTime}
-            <br />
             <br />
             {platformList.map((val) =>
                 <PlatformCard key={val.platform_id} platform={val} />
             )}
+            <div className={classes.updatedTime}>
+                更新時間: {lastUpdatedTime}
+            </div>
             <br />
             <br />
             <Footer callback={selectHandler} />

@@ -32,11 +32,11 @@ function FavStations(props) {
 
     return (
         <Fragment>
-            <button onClick={addToFavHandler} >Add to Fav</button>
-            <button onClick={delFromFavHandler} >Del from Fav</button>
+            <button onClick={addToFavHandler} className={`${classes.btn} ${classes.add}`}>加至書籤</button>
+            <button onClick={delFromFavHandler} className={`${classes.btn} ${classes.del}`}>從書籤刪除</button>
             <div>
                 {favorites.map((station) => {
-                    return <button key={station} value={station} onClick={() => onClickFavHandler(station)}>
+                    return <button key={station} value={station} className={classes.btn} onClick={() => onClickFavHandler(station)}>
                         {config.stationName[station]["name"]}
                     </button>
                 })}

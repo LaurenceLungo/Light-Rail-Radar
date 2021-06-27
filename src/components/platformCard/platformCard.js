@@ -16,12 +16,12 @@ function PlatformCard(props) {
     }
     return (
         <Fragment>
-            <div>{platform_id}號月台</div>
-            <table>
+            <div className={classes.platform}>{platform_id}號月台</div>
+            <table className={classes.table}>
                 <tbody>
                     {route_list.map((route, idx) => {
                         return (
-                            <tr key={idx}>
+                            <tr key={idx} className={classes.tr}>
                                 <RouteEntry route={route} />
                             </tr>
                         )

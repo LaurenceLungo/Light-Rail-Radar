@@ -1,7 +1,7 @@
 import classes from "./footer.module.css";
 import StationMenu from "./stationMenu/stationMenu";
 import FavStations from "./favStations/favStations";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
 function Footer(props) {
 
@@ -13,10 +13,10 @@ function Footer(props) {
     }
 
     return (
-        <Fragment>
+        <div className={classes.footer}>
             <StationMenu callback={callback} selected={props.selected} />
             <FavStations currentStation={currentStation} callback={props.callback} />
-        </Fragment>
+        </div>
     )
 }
 
