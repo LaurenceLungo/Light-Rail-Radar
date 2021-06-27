@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "輕鐵報時！",
+  "name": "輕鐵到站時間預報查詢",
   "icons": [
     {
       "src": "favicon.ico",
