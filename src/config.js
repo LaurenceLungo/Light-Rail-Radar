@@ -72,6 +72,7 @@ var config = {
     },
     etaURL: "https://rt.data.gov.hk/v1/transport/mtr/lrt/getSchedule",
     refreshInterval: 15000,
+    refreshIntervalSec: "15"
 };
 
 export default config;

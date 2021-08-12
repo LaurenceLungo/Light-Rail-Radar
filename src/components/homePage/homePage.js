@@ -8,7 +8,7 @@ import { useInterval } from "@chakra-ui/react";
 function HomePage() {
     const [station, setStation] = useState("unselected");
     const [platformList, setPlatformList] = useState([]);
-    const [lastUpdatedTime, setLastUpdatedTime] = useState(null);
+    const [lastUpdatedTime, setLastUpdatedTime] = useState("-");
 
     function tryFetchingEta(selectedStation) {
         if (selectedStation !== "unselected") {
@@ -43,7 +43,7 @@ function HomePage() {
                 <PlatformCard key={val.platform_id} platform={val} />
             )}
             <div className={classes.updatedTime}>
-                更新時間: {lastUpdatedTime}
+                更新時間: {lastUpdatedTime} (每{config.refreshIntervalSec}秒自動更新)
             </div>
             <br />
             <br />
