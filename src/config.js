@@ -69,7 +69,9 @@ var config = {
         "510":{"name":"天悅Tin Yuet","zone":"5A"},
         "530":{"name":"濕地公園Wetland Park","zone":"5A"},
         "385":{"name":"洪天路緊急月台Hung Tin Road Emergency Platform","zone":"緊急月台"}
-    }, etaURL: "https://rt.data.gov.hk/v1/transport/mtr/lrt/getSchedule"
+    },
+    etaURL: "https://rt.data.gov.hk/v1/transport/mtr/lrt/getSchedule",
+    refreshInterval: 15000,
 };
 
 export default config;

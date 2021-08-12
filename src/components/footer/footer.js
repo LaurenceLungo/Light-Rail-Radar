@@ -1,4 +1,5 @@
 import classes from "./footer.module.css";
+import { Circle, Box } from "@chakra-ui/react"
 import StationMenu from "./stationMenu/stationMenu";
 import FavStations from "./favStations/favStations";
 import { useState } from "react";
@@ -13,10 +14,12 @@ function Footer(props) {
     }
 
     return (
-        <div className={classes.footer}>
-            <StationMenu callback={callback} selected={props.selected} />
+        <Box className={classes.footer}>
+            <Circle>
+                <StationMenu callback={callback} selected={props.selected} />
+            </Circle>
             <FavStations currentStation={currentStation} callback={props.callback} />
-        </div>
+        </Box>
     )
 }
 

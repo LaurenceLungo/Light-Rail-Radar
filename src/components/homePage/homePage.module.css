@@ -2,3 +2,10 @@
     font-size: 14px;
     text-align: left;
 }
+
+.footer {
+    position:absolute;
+    left:0;
+    bottom:0;
+    right:0;
+}
