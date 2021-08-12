@@ -15,6 +15,7 @@ function Footer(props) {
     }
 
     function favStationCallback(station) {
+        setCurrentStation(station);
         setSelectedStation(station);
         props.callback(station);
     }
