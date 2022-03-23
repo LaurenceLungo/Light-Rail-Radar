@@ -1,4 +1,4 @@
-# Light-Rail-Radar
+# [Light-Rail-Radar](https://lightrailradar.netlify.app)
 A progressive web app (PWA) to quickly look up the estimated time of arrival (ETA) of Hong Kong Light Rail.
 
 <p align="center">
