@@ -1,4 +1,9 @@
-# Getting Started with Create React App
+# [Light-Rail-Radar](https://lightrailradar.netlify.app)
+A progressive web app (PWA) to quickly look up the estimated time of arrival (ETA) of Hong Kong Light Rail.
+
+<p align="center">
+  <img src="https://github.com/LaurenceLungo/Light-Rail-Radar/blob/main/images/iPhone_UI.png" width="400" />
+</p>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
