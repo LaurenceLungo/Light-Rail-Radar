@@ -1,5 +1,9 @@
 # [Light-Rail-Radar](https://lightrailradar.netlify.app)
-Progressive web app (PWA) to quickly look up the next train of Hong Kong Light Rail.
+A progressive web app (PWA) to quickly look up the estimated time of arrival (ETA) of Hong Kong Light Rail on your phone.
+
+> This project is started due to the lack of convenient ways to look up the next train of Hong Kong Light Rail. Many physical overhead displays in Light Rail platforms were taken down when MTR tried to streamline the look-up feature into its MTR Mobile app, but it failed miserably since the app is extremely inconvenient to use with a complicated UX and slow response time.
+
+This progressive web app aims at providing the **quickest and easiest way possible** to look up the next light rail from your mobile.
 
 <p align="center">
   <img src="https://github.com/LaurenceLungo/Light-Rail-Radar/blob/main/images/iPhone_UI.png" width="400" />
