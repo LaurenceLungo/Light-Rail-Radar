@@ -1,5 +1,5 @@
 # [Light-Rail-Radar](https://lightrailradar.netlify.app)
-A progressive web app (PWA) to quickly look up the estimated time of arrival (ETA) of Hong Kong Light Rail.
+Progressive web app (PWA) to quickly look up the next train of Hong Kong Light Rail.
 
 <p align="center">
   <img src="https://github.com/LaurenceLungo/Light-Rail-Radar/blob/main/images/iPhone_UI.png" width="400" />
