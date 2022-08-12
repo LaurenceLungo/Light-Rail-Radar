@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import classes from "./homePage.module.css";
 import Footer from "../footer/footer";
 import PlatformCard from "../platformCard/platformCard";
