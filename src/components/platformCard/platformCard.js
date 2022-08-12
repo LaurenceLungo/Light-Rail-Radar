@@ -10,7 +10,12 @@ function PlatformCard(props) {
     if (!route_list) {
         return (
             <Fragment>
-            <div>{platform_id}號月台</div>
+            <div className={classes.platform}>{platform_id}號月台</div>
+            <table className={classes.table}>
+                <div className={classes.endOfServiceNotice}>
+                    -尾班車已過-
+                </div>
+            </table>
         </Fragment>
         )
     }
