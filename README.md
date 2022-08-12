@@ -1,3 +1,4 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/928393ef-be29-435c-82ba-c1f59b3a2d6c/deploy-status)](https://app.netlify.com/sites/lightrailradar/deploys)
 # [Light-Rail-Radar](https://lightrailradar.netlify.app)
 A progressive web app (PWA) to quickly look up the estimated time of arrival (ETA) of Hong Kong Light Rail on your phone.
 
