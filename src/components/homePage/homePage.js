@@ -12,9 +12,8 @@ function HomePage() {
 
     function tryFetchingEta(selectedStation) {
         if (selectedStation !== "unselected") {
-            fetch(
-                `${config.etaURL}?station_id=${selectedStation}`
-            ).then(res => {
+            const query = process.env.REACT_APP_CORS_PROXY_API ? `${process.env.REACT_APP_CORS_PROXY_API}/${config.etaURL}?station_id=${selectedStation}` : `${config.etaURL}?station_id=${selectedStation}`;
+            fetch(query).then(res => {
                 return res.json();
             }).then(data => {
                 setPlatformList(data.platform_list);
