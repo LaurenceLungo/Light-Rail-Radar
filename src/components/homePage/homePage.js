@@ -42,7 +42,7 @@ function HomePage() {
                 <PlatformCard key={val.platform_id} platform={val} />
             )}
             <div className={classes.updatedTime}>
-                更新時間: {lastUpdatedTime} (每{config.refreshIntervalSec}秒自動更新)
+                更新時間：{lastUpdatedTime} (每{config.refreshIntervalSec}秒自動更新)
             </div>
             <br />
             <br />
