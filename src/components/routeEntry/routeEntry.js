@@ -8,6 +8,7 @@ function RouteEntry(props) {
             <td>{route.route_no}</td>
             <td>{route.dest_ch}</td>
             <td>{route.time_ch}</td>
+            <td>{route.train_length} 卡</td>
         </Fragment>
     )
 }
