@@ -1,15 +1,15 @@
-import { Fragment } from "react";
 import classes from "./routeEntry.module.css";
+import { Tr, Td } from '@chakra-ui/react'
 
 function RouteEntry(props) {
     const route = props.route;
     return (
-        <Fragment>
-            <td>{route.route_no}</td>
-            <td>{route.dest_ch}</td>
-            <td>{route.time_ch}</td>
-            <td>{route.train_length} 卡</td>
-        </Fragment>
+        <Tr>
+            <Td>{route.route_no}</Td>
+            <Td>{route.dest_ch}</Td>
+            <Td>{route.time_ch}</Td>
+            <Td>{route.train_length} 卡</Td>
+        </Tr>
     )
 }
 
