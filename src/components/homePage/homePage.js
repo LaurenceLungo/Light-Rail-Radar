@@ -3,7 +3,7 @@ import classes from "./homePage.module.css";
 import Footer from "../footer/footer";
 import PlatformCard from "../platformCard/platformCard";
 import config from "../../config";
-import { useInterval } from "@chakra-ui/react";
+import { useInterval, Container, Text } from "@chakra-ui/react";
 
 function HomePage() {
     const [station, setStation] = useState("unselected");
@@ -41,9 +41,12 @@ function HomePage() {
             {platformList.map((val) =>
                 <PlatformCard key={val.platform_id} platform={val} />
             )}
-            <div className={classes.updatedTime}>
-                更新時間：{lastUpdatedTime} (每{config.refreshIntervalSec}秒自動更新)
-            </div>
+            <br />
+            <Container >
+                <Text fontSize='sm'>
+                    更新時間：{lastUpdatedTime} (每{config.refreshIntervalSec}秒自動更新)
+                </Text>
+            </Container>
             <br />
             <br />
             <Footer callback={selectHandler} />

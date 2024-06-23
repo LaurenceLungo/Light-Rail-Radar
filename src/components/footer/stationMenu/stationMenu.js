@@ -1,5 +1,5 @@
 import classes from "./stationMenu.module.css";
-import { Select, useProps } from "@chakra-ui/react"
+import { Select } from "@chakra-ui/react"
 import config from '../../../config';
 import { useEffect, useState } from "react";
 
