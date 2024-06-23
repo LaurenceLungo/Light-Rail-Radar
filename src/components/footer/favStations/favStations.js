@@ -1,7 +1,8 @@
 import classes from "./favStations.module.css";
-import { Center, VStack, HStack, Button, useColorMode } from "@chakra-ui/react";
+import { Center, VStack, HStack, Button, IconButton, useColorMode } from "@chakra-ui/react";
+import { MoonIcon } from '@chakra-ui/icons';
 import config from "../../../config";
-import { Fragment, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 function FavStations(props) {
     let iniValFavorites = [];
@@ -39,9 +40,9 @@ function FavStations(props) {
                 <HStack spacing={4}>
                     <Button variant="outline" colorScheme="blue" onClick={addToFavHandler} >加至書籤</Button>
                     <Button variant="outline" colorScheme="red" onClick={delFromFavHandler} >從書籤刪除</Button>
-                    {/* <Button onClick={toggleColorMode}>
+                    <IconButton onClick={toggleColorMode} icon={<MoonIcon />}>
                         Toggle {colorMode === "light" ? "Dark" : "Light"}
-                    </Button> */}
+                    </IconButton>
                 </HStack>
                 <div>
                     {favorites.map((station) => {
