@@ -66,7 +66,7 @@ function Footer(props) {
                 (err) => {
                     setError(err.message);
                     if (err.code === 1) {
-                        alert("Location access is blocked. Enable it in: Settings > Safari > Location > Set to 'Ask' or 'Allow'");
+                        alert("無法存取你的定位，請到「設定」開啟定位及允許存取。");
                     }
                 }
             );
