@@ -91,6 +91,7 @@ function Footer(props) {
                     <IconButton onClick={requestLocation} icon={<AtSignIcon />} />
                 </HStack>
             </VStack>
+            <br/>
             <FavStations currentStation={currentStation} callback={favStationCallback} />
         </Box>
     )
