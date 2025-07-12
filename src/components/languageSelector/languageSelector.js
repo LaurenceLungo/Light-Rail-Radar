@@ -39,19 +39,19 @@ export default function LanguageSelector() {
         >
             <Button
                 size="sm"
-                variant={language === "en" ? "solid" : "outline"}
+                variant={language === "en" ? "outline" : "subtle"}
                 onClick={() => setLanguage("en")}
                 style={{ opacity: opacity, transition: 'opacity 0.2s' }}
-                colorScheme="blue"
+                colorScheme="white"
             >
                 Eng
             </Button>
             <Button
                 size="sm"
-                variant={language === "zh" ? "solid" : "outline"}
+                variant={language === "zh" ? "outline" : "subtle"}
                 onClick={() => setLanguage("zh")}
                 style={{ opacity: opacity, transition: 'opacity 0.2s' }}
-                colorScheme="blue"
+                colorScheme="white"
             >
                 中文
             </Button>
