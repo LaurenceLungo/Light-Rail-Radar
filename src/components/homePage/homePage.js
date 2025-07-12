@@ -46,11 +46,13 @@ function HomePage() {
                 <PlatformCard key={val.platform_id} platform={val} />
             )}
             <br />
-            <Container>
-                <Text fontSize='sm'>
-                    {t.updateTime}：{lastUpdatedTime} ({t.autoUpdateMessage(config.refreshIntervalSec)})
-                </Text>
-            </Container>
+            {station !== "unselected" && (
+                <Container>
+                    <Text fontSize='sm'>
+                        {t.updateTime}：{lastUpdatedTime} ({t.autoUpdateMessage(config.refreshIntervalSec)})
+                    </Text>
+                </Container>
+            )}
             <br />
             <br />
             <Footer callback={selectHandler} />
