@@ -1,9 +1,15 @@
 import classes from "./favStations.module.css";
 import { Center, VStack, HStack, Button, useColorMode } from "@chakra-ui/react";
 import config from "../../../config";
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect, useContext } from "react";
+import { SimpleGrid, Tag } from "@chakra-ui/react";
+import { LanguageContext } from "../../../context/LanguageContext";
+import { translations } from "../../../translations/translations";
 
 function FavStations(props) {
+    const { language } = useContext(LanguageContext);
+    const t = translations[language];
+
     let iniValFavorites = [];
     const { colorMode, toggleColorMode } = useColorMode();
 
@@ -37,11 +43,12 @@ function FavStations(props) {
         <Center>
             <VStack spacing={4}>
                 <HStack spacing={4}>
-                    <Button variant="outline" colorScheme="blue" onClick={addToFavHandler} >加至書籤</Button>
-                    <Button variant="outline" colorScheme="red" onClick={delFromFavHandler} >從書籤刪除</Button>
-                    {/* <Button onClick={toggleColorMode}>
-                        Toggle {colorMode === "light" ? "Dark" : "Light"}
-                    </Button> */}
+                    <Button variant="outline" colorScheme="blue" onClick={addToFavHandler} >
+                        {t.addToBookmark}
+                    </Button>
+                    <Button variant="outline" colorScheme="red" onClick={delFromFavHandler} >
+                        {t.removeFromBookmark}
+                    </Button>
                 </HStack>
                 <div>
                     {favorites.map((station) => {
