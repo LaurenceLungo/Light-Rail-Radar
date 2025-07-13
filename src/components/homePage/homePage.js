@@ -21,7 +21,9 @@ function HomePage() {
                 return res.json();
             }).then(data => {
                 setPlatformList(data.platform_list);
-                setLastUpdatedTime(data.system_time);
+                // Extract time portion from system_time
+                const timeOnly = data.system_time.split(' ')[1];
+                setLastUpdatedTime(timeOnly);
             });
         }
     }
@@ -49,7 +51,7 @@ function HomePage() {
             {station !== "unselected" && (
                 <Container>
                     <Text fontSize='sm'>
-                        {t.updateTime}：{lastUpdatedTime} ({t.autoUpdateMessage(config.refreshIntervalSec)})
+                        {t.updateTime}: {lastUpdatedTime} ({t.autoUpdateMessage(config.refreshIntervalSec)})
                     </Text>
                 </Container>
             )}
