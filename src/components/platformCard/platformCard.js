@@ -1,5 +1,8 @@
 import classes from "./platformCard.module.css";
 import RouteEntry from "../routeEntry/routeEntry";
+import { useContext } from "react";
+import { LanguageContext } from "../../context/LanguageContext";
+import { translations } from "../../translations/translations";
 import {
   Table,
   Thead,
@@ -16,16 +19,20 @@ function PlatformCard(props) {
   const platform = props.platform;
   const route_list = platform.route_list;
   const platform_id = platform.platform_id;
+  const { language } = useContext(LanguageContext);
+  const t = translations[language];
 
   if (!route_list) {
     return (
       <TableContainer>
         <Table variant='simple' size='sm'>
-          <TableCaption placement='top'>{platform_id}號月台</TableCaption>
+          <TableCaption placement='top'>{t.platform(platform_id)}</TableCaption>
           <Tbody>
             <Tr>
               <Td>
-                <Text className={classes.endOfServiceNotice} >-尾班車已過-</Text>
+                <Text className={classes.endOfServiceNotice}>
+                  {t.endOfService}
+                </Text>
               </Td>
             </Tr>
           </Tbody>
@@ -36,21 +43,19 @@ function PlatformCard(props) {
   return (
     <TableContainer>
       <Table variant='simple' size='sm'>
-        <TableCaption placement='top'>{platform_id}號月台</TableCaption>
+        <TableCaption placement='top'>{t.platform(platform_id)}</TableCaption>
         <Thead>
           <Tr>
-            <Th>路線</Th>
-            <Th>方向</Th>
-            <Th>到達時間</Th>
-            <Th>車卡數</Th>
+            <Th>{t.route}</Th>
+            <Th>{t.direction}</Th>
+            <Th>{t.arrivalTime}</Th>
+            <Th>{t.cars}</Th>
           </Tr>
         </Thead>
         <Tbody>
-          {route_list.map((route, idx) => {
-            return (
-              <RouteEntry route={route} />
-            )
-          })}
+          {route_list.map((route, idx) => (
+            <RouteEntry key={idx} route={route} />
+          ))}
         </Tbody>
       </Table>
     </TableContainer>

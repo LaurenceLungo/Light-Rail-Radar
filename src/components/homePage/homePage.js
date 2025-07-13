@@ -1,14 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import classes from "./homePage.module.css";
 import Footer from "../footer/footer";
 import PlatformCard from "../platformCard/platformCard";
 import config from "../../config";
 import { useInterval, Container, Text } from "@chakra-ui/react";
+import { LanguageContext } from "../../context/LanguageContext";
+import { translations } from "../../translations/translations";
 
 function HomePage() {
     const [station, setStation] = useState("unselected");
     const [platformList, setPlatformList] = useState([]);
     const [lastUpdatedTime, setLastUpdatedTime] = useState("-");
+    const { language } = useContext(LanguageContext);
+    const t = translations[language];
 
     function tryFetchingEta(selectedStation) {
         if (selectedStation !== "unselected") {
@@ -17,7 +21,9 @@ function HomePage() {
                 return res.json();
             }).then(data => {
                 setPlatformList(data.platform_list);
-                setLastUpdatedTime(data.system_time);
+                // Extract time portion from system_time
+                const timeOnly = data.system_time.split(' ')[1];
+                setLastUpdatedTime(timeOnly);
             });
         }
     }
@@ -42,11 +48,13 @@ function HomePage() {
                 <PlatformCard key={val.platform_id} platform={val} />
             )}
             <br />
-            <Container >
-                <Text fontSize='sm'>
-                    更新時間：{lastUpdatedTime} (每{config.refreshIntervalSec}秒自動更新)
-                </Text>
-            </Container>
+            {station !== "unselected" && (
+                <Container>
+                    <Text fontSize='sm'>
+                        {t.updateTime}: {lastUpdatedTime} ({t.autoUpdateMessage(config.refreshIntervalSec)})
+                    </Text>
+                </Container>
+            )}
             <br />
             <br />
             <Footer callback={selectHandler} />
