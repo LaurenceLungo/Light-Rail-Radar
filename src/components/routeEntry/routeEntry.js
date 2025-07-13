@@ -14,7 +14,7 @@ function RouteEntry(props) {
             <Td>{route.route_no}</Td>
             <Td>{language === 'zh' ? route.dest_ch : route.dest_en}</Td>
             <Td>{language === 'zh' ? route.time_ch : route.time_en}</Td>
-            <Td>{route.train_length}{language === 'zh' ? t.cars : ''}</Td>
+            <Td>{route.train_length}</Td>
         </Tr>
     )
 }
