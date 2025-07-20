@@ -13,12 +13,6 @@ export const translations: Translations = {
         removeFromBookmark: 'Remove Bookmark',
         autoUpdateMessage: (seconds: number) => `auto updated every ${seconds}s`,
         lineStopped: 'Line is stopped',
-        pwaInstallTitle: 'Install App',
-        pwaInstallMessage: 'for the best experience',
-        pwaInstallButton: 'Install',
-        pwaInstructionsTitle: 'How to Install',
-        pwaInstructionsMessage: 'Tap the install button below, then select "Add to Home Screen". Alternatively, select "Add to Home Screen" from your browser\'s share menu.',
-        pwaShareButton: 'Install',
         pleaseSelect: 'Please Select Light Rail Station',
     },
     zh: {
@@ -33,12 +27,6 @@ export const translations: Translations = {
         removeFromBookmark: '從書籤刪除',
         autoUpdateMessage: (seconds: number) => `每${seconds}秒自動更新`,
         lineStopped: '路線暫停服務',
-        pwaInstallTitle: '安裝App',
-        pwaInstallMessage: '以獲得最佳體驗',
-        pwaInstallButton: '安裝',
-        pwaInstructionsTitle: '如何安裝',
-        pwaInstructionsMessage: '點擊下方安裝按鈕，然後選擇「添加到主畫面」。或者，從瀏覽器的分享選單選擇「添加到主畫面」。',
-        pwaShareButton: '安裝',
         pleaseSelect: '請選擇輕鐵站',
     }
 }; 

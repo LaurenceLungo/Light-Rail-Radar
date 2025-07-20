@@ -5,7 +5,6 @@ import { ChakraProvider } from "@chakra-ui/react";
 import theme from "./theme";
 import { LanguageProvider } from './context/LanguageContext';
 import LanguageSelector from './components/languageSelector/languageSelector';
-import PWAInstallBanner from './components/pwaInstallBanner/pwaInstallBanner';
 
 const App: React.FC = () => {
   return (
@@ -14,7 +13,6 @@ const App: React.FC = () => {
         <div className="App">
           <LanguageSelector />
           <HomePage />
-          <PWAInstallBanner />
         </div>
       </LanguageProvider>
     </ChakraProvider>
