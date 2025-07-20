@@ -1,11 +1,27 @@
 import React, { useState, useEffect } from "react";
 import classes from "./footer.module.css";
-import { Circle, Box, IconButton, HStack, VStack } from "@chakra-ui/react";
+import { Circle, Box, IconButton, HStack, VStack, Icon } from "@chakra-ui/react";
 import StationMenu from "./stationMenu/stationMenu";
 import FavStations from "./favStations/favStations";
 import config from "../../config";
-import { AtSignIcon } from "@chakra-ui/icons";
 import { FooterProps, Station } from "../../types";
+
+// Custom Location Pin Icon (inverted teardrop with circle hole)
+const TargetIcon = (props: any) => (
+  <Icon viewBox="0 0 24 24" {...props}>
+    <defs>
+      <mask id="hole">
+        <rect width="24" height="24" fill="white"/>
+        <circle cx="12" cy="9" r="2.5" fill="black"/>
+      </mask>
+    </defs>
+    <path
+      fill="currentColor"
+      d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+      mask="url(#hole)"
+    />
+  </Icon>
+);
 
 const Footer: React.FC<FooterProps> = ({ callback }) => {
     const [currentStation, setCurrentStation] = useState<string | null>(null);
@@ -91,7 +107,7 @@ const Footer: React.FC<FooterProps> = ({ callback }) => {
                     <Circle>
                         <StationMenu callback={stationMenuCallback} selected={selectedStation} />
                     </Circle>
-                    <IconButton onClick={requestLocation} icon={<AtSignIcon />} aria-label="Get location" />
+                    <IconButton onClick={requestLocation} icon={<TargetIcon />} aria-label="Get location" />
                 </HStack>
             </VStack>
             <br/>
