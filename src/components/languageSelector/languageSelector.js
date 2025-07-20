@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useCallback } from "react";
 import { Button, Flex } from "@chakra-ui/react";
 import { LanguageContext } from "../../context/LanguageContext";
 
@@ -6,26 +6,23 @@ export default function LanguageSelector() {
     const { language, setLanguage } = useContext(LanguageContext);
     const [opacity, setOpacity] = useState(0);
 
+    // Throttled scroll handler using useCallback for better performance
+    const handleScroll = useCallback(() => {
+        const shouldBeTransparent = window.scrollY > 0;
+        setOpacity(shouldBeTransparent ? 0 : 0.8);
+    }, []);
+
     useEffect(() => {
-        const handleScroll = () => {
-            const shouldBeTransparent = window.scrollY > 0;
-            setOpacity(shouldBeTransparent ? 0 : 0.8);
-        };
-        
         // Run initial check
         handleScroll();
         
-        // Add scroll listeners to multiple targets
+        // Only add scroll listener to window (most efficient)
         window.addEventListener('scroll', handleScroll, { passive: true });
-        document.addEventListener('scroll', handleScroll, { passive: true });
-        document.body.addEventListener('scroll', handleScroll, { passive: true });
         
         return () => {
             window.removeEventListener('scroll', handleScroll);
-            document.removeEventListener('scroll', handleScroll);
-            document.body.removeEventListener('scroll', handleScroll);
         };
-    }, []);
+    }, [handleScroll]);
 
     return (
         <Flex 
