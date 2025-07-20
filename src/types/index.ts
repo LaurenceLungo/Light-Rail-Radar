@@ -1,5 +1,3 @@
-import React from 'react';
-
 // Station and platform types
 export interface Station {
   name: string;
