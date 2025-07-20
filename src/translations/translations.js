@@ -10,6 +10,7 @@ export const translations = {
         addToBookmark: 'Add Bookmark',
         removeFromBookmark: 'Remove Bookmark',
         autoUpdateMessage: (seconds) => `auto updated every ${seconds}s`,
+        lineStopped: 'Line is stopped',
     },
     zh: {
         platform: (platformNumber) => `${platformNumber}號月台`,
@@ -22,5 +23,6 @@ export const translations = {
         addToBookmark: '加至書籤',
         removeFromBookmark: '從書籤刪除',
         autoUpdateMessage: (seconds) => `每${seconds}秒自動更新`,
+        lineStopped: '路線暫停服務',
     }
 };

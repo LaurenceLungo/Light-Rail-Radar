@@ -9,11 +9,14 @@ function RouteEntry(props) {
     const { language } = useContext(LanguageContext);
     const t = translations[language];
 
+    // Check if the route is stopped due to typhoon
+    const isStopped = route.stop === 1;
+
     return (
         <Tr>
             <Td>{route.route_no}</Td>
             <Td>{language === 'zh' ? route.dest_ch : route.dest_en}</Td>
-            <Td>{language === 'zh' ? route.time_ch : route.time_en}</Td>
+            <Td>{isStopped ? t.lineStopped : (language === 'zh' ? route.time_ch : route.time_en)}</Td>
             <Td>{route.train_length}</Td>
         </Tr>
     )
