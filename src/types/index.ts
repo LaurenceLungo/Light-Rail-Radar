@@ -70,6 +70,7 @@ export interface TranslationStrings {
   pwaInstructionsTitle: string;
   pwaInstructionsMessage: string;
   pwaShareButton: string;
+  pleaseSelect: string;
 }
 
 export interface Translations {

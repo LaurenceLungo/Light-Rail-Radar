@@ -4,6 +4,7 @@ import { Select } from "@chakra-ui/react";
 import config from '../../../config';
 import { LanguageContext } from "../../../context/LanguageContext";
 import { StationMenuProps } from "../../../types";
+import { translations } from "../../../translations/translations";
 
 const StationMenu: React.FC<StationMenuProps> = ({ callback, selected }) => {
     const [selectedValue, setSelected] = useState<string>(selected);
@@ -23,7 +24,7 @@ const StationMenu: React.FC<StationMenuProps> = ({ callback, selected }) => {
         <div className={classes.select}>
             <Select onChange={onChangeHandler} value={selectedValue}>
                 <option key="unselected" value="unselected" disabled>
-                    {language === 'zh' ? '請選擇' : 'Please Select'}
+                    {translations[language].pleaseSelect}
                 </option>
                 {Object.keys(config.stationName).map(station => {
                     return (

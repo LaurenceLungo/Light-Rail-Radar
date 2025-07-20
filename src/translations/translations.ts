@@ -19,6 +19,7 @@ export const translations: Translations = {
         pwaInstructionsTitle: 'How to Install',
         pwaInstructionsMessage: 'Tap the install button below, then select "Add to Home Screen". Alternatively, select "Add to Home Screen" from your browser\'s share menu.',
         pwaShareButton: 'Install',
+        pleaseSelect: 'Please Select Light Rail Station',
     },
     zh: {
         platform: (platformNumber: string) => `${platformNumber}號月台`,
@@ -38,5 +39,6 @@ export const translations: Translations = {
         pwaInstructionsTitle: '如何安裝',
         pwaInstructionsMessage: '點擊下方安裝按鈕，然後選擇「添加到主畫面」。或者，從瀏覽器的分享選單選擇「添加到主畫面」。',
         pwaShareButton: '安裝',
+        pleaseSelect: '請選擇輕鐵站',
     }
 }; 
