@@ -17,7 +17,7 @@ This progressive web app aims at providing the **quickest and easiest way possib
 
 - **Framework**: [React](https://reactjs.org/) 18 with [TypeScript](https://www.typescriptlang.org/)
 - **UI Library**: [Chakra UI](https://chakra-ui.com/)
-- **Bootstrap**: [Create React App](https://github.com/facebook/create-react-app)
+- **Build Tool**: [Vite](https://vitejs.dev/)
 - **Package Manager**: [Yarn](https://classic.yarnpkg.com/en/docs/install)
 - **Language**: TypeScript for type safety and better development experience
 
@@ -53,20 +53,10 @@ yarn install
 To start the development server, run the following command:
 
 ```bash
-yarn start
+yarn dev
 ```
 
-This will run the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser. The page will reload if you make edits, and you will also see any TypeScript errors in the console.
-
-### Running Tests
-
-To run the test suite in interactive watch mode, use:
-
-```bash
-yarn test
-```
-
-For more information on running tests, see the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests).
+This will run the app in development mode. Open [http://localhost:5173](http://localhost:5173) to view it in the browser. The page will reload if you make edits, and you will also see any TypeScript errors in the console.
 
 ### Building the App for Production
 
@@ -76,9 +66,17 @@ To build the app for production, use:
 yarn build
 ```
 
-This will create an optimized build in the `build` folder. The build is minified, and the filenames include the hashes. Your app is ready to be deployed!
+This will create an optimized build in the `dist` folder (default for Vite). The build is minified, and the filenames include the hashes. Your app is ready to be deployed!
 
-For more information on deployment, see the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment).
+### Previewing the Production Build
+
+To locally preview the production build:
+
+```bash
+yarn preview
+```
+
+This will serve the contents of the `dist` folder at [http://localhost:4173](http://localhost:4173).
 
 ### Type Checking
 
@@ -88,34 +86,30 @@ To run TypeScript type checking without building:
 npx tsc --noEmit
 ```
 
-### Ejecting the App
+## Deployment (Netlify)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To deploy on Netlify, use the following settings:
 
-If you need to customize the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project:
+- **Build command:** `yarn build`
+- **Publish directory:** `dist`
 
-```bash
-yarn eject
-```
-
-This will copy all the configuration files and transitive dependencies (webpack, Babel, ESLint, etc.) into your project so you have full control over them. At this point, you're on your own. You don't have to ever use `eject`, but it's available if needed.
+Netlify will automatically serve the optimized static files from the `dist` directory after building.
 
 ## Project Structure
 
 ```
 src/
-├── components/          # React components
-│   ├── footer/         # Footer components (station menu, favorites)
-│   ├── homePage/       # Main page component
-│   ├── languageSelector/ # Language toggle component
-│   ├── platformCard/   # Platform display component
-│   └── routeEntry/     # Route information component
-├── context/            # React context (language management)
-├── types/              # TypeScript type definitions
-├── translations/       # Internationalization files
-├── App.tsx            # Main app component
-├── index.tsx          # App entry point
-└── config.ts          # Application configuration
+├── components/
+│   ├── footer/
+│   │   ├── favStations/
+│   │   └── stationMenu/
+│   ├── homePage/
+│   ├── languageSelector/
+│   ├── platformCard/
+│   └── routeEntry/
+├── context/
+├── types/
+├── translations/
 ```
 
 ## Features
