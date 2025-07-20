@@ -1,8 +1,7 @@
 import classes from "./favStations.module.css";
-import { Center, VStack, HStack, Button, useColorMode } from "@chakra-ui/react";
+import { Center, VStack, HStack, Button } from "@chakra-ui/react";
 import config from "../../../config";
-import { Fragment, useState, useEffect, useContext } from "react";
-import { SimpleGrid, Tag } from "@chakra-ui/react";
+import { useState, useEffect, useContext } from "react";
 import { LanguageContext } from "../../../context/LanguageContext";
 import { translations } from "../../../translations/translations";
 
@@ -11,7 +10,6 @@ function FavStations(props) {
     const t = translations[language];
 
     let iniValFavorites = [];
-    const { colorMode, toggleColorMode } = useColorMode();
 
     if (localStorage.getItem('favorites') !== null) {
         iniValFavorites = JSON.parse(localStorage.getItem('favorites'));
