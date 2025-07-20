@@ -1,10 +1,12 @@
-import { useContext, useState, useEffect, useCallback } from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react";
 import { Button, Flex } from "@chakra-ui/react";
 import { LanguageContext } from "../../context/LanguageContext";
+import { LanguageSelectorProps } from "../../types";
 
-export default function LanguageSelector() {
-    const { language, setLanguage } = useContext(LanguageContext);
-    const [opacity, setOpacity] = useState(0);
+const LanguageSelector: React.FC<LanguageSelectorProps> = () => {
+    const languageContext = useContext(LanguageContext);
+    const { language, setLanguage } = languageContext || { language: 'zh', setLanguage: () => {} };
+    const [opacity, setOpacity] = useState<number>(0);
 
     // Throttled scroll handler using useCallback for better performance
     const handleScroll = useCallback(() => {
@@ -54,4 +56,6 @@ export default function LanguageSelector() {
             </Button>
         </Flex>
     );
-}
+};
+
+export default LanguageSelector; 

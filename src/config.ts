@@ -1,4 +1,6 @@
-var config = {
+import { AppConfig } from './types';
+
+const config: AppConfig = {
     stationName: {
     "15": {"name": "蝴蝶Butterfly", "zone": "1", "lat": 22.37833353846177, "long": 113.96170553990035},
     "260": {"name": "豐景園Goodview Garden", "zone": "1", "lat": 22.383612850664605, "long": 113.97314253010921},
@@ -75,4 +77,4 @@ var config = {
     refreshIntervalSec: "10"
 };
 
-export default config;
+export default config; 

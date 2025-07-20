@@ -1,6 +1,6 @@
+import React, { useContext } from "react";
 import classes from "./platformCard.module.css";
 import RouteEntry from "../routeEntry/routeEntry";
-import { useContext } from "react";
 import { LanguageContext } from "../../context/LanguageContext";
 import { translations } from "../../translations/translations";
 import {
@@ -13,13 +13,14 @@ import {
   Text,
   TableCaption,
   TableContainer,
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
+import { PlatformCardProps } from "../../types";
 
-function PlatformCard(props) {
-  const platform = props.platform;
+const PlatformCard: React.FC<PlatformCardProps> = ({ platform }) => {
   const route_list = platform.route_list;
   const platform_id = platform.platform_id;
-  const { language } = useContext(LanguageContext);
+  const languageContext = useContext(LanguageContext);
+  const language = languageContext?.language || 'zh';
   const t = translations[language];
 
   if (!route_list) {
@@ -38,8 +39,9 @@ function PlatformCard(props) {
           </Tbody>
         </Table>
       </TableContainer>
-    )
+    );
   }
+  
   return (
     <TableContainer>
       <Table variant='simple' size='sm'>
@@ -59,7 +61,7 @@ function PlatformCard(props) {
         </Tbody>
       </Table>
     </TableContainer>
-  )
-}
+  );
+};
 
-export default PlatformCard;
+export default PlatformCard; 

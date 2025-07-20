@@ -1,25 +1,27 @@
+import React, { useEffect, useState, useContext } from "react";
 import classes from "./stationMenu.module.css";
-import { Select } from "@chakra-ui/react"
+import { Select } from "@chakra-ui/react";
 import config from '../../../config';
-import { useEffect, useState, useContext } from "react";
 import { LanguageContext } from "../../../context/LanguageContext";
+import { StationMenuProps } from "../../../types";
 
-function StationMenu(props) {
-    const [selected, setSelected] = useState(props.selected);
-    const { language } = useContext(LanguageContext);
+const StationMenu: React.FC<StationMenuProps> = ({ callback, selected }) => {
+    const [selectedValue, setSelected] = useState<string>(selected);
+    const languageContext = useContext(LanguageContext);
+    const language = languageContext?.language || 'zh';
 
-    function onChangeHandler(e) {
+    const onChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>): void => {
         setSelected(e.currentTarget.value);
-        props.callback(e);
-    }
+        callback(e);
+    };
 
     useEffect(() => {
-        setSelected(props.selected)
-    }, [props.selected]);
+        setSelected(selected);
+    }, [selected]);
 
     return (
         <div className={classes.select}>
-            <Select onChange={onChangeHandler} value={selected}>
+            <Select onChange={onChangeHandler} value={selectedValue}>
                 <option key="unselected" value="unselected" disabled>
                     {language === 'zh' ? '請選擇' : 'Please Select'}
                 </option>
@@ -28,11 +30,11 @@ function StationMenu(props) {
                         <option key={station} value={station}>
                             {config.stationName[station]['name']}
                         </option>
-                    )
+                    );
                 })}
             </Select>
         </div>
-    )
-}
+    );
+};
 
-export default StationMenu;
+export default StationMenu; 

@@ -1,33 +1,34 @@
+import React, { useState, useEffect } from "react";
 import classes from "./footer.module.css";
 import { Circle, Box, IconButton, HStack, VStack } from "@chakra-ui/react";
 import StationMenu from "./stationMenu/stationMenu";
 import FavStations from "./favStations/favStations";
-import { useState, useEffect } from "react";
 import config from "../../config";
 import { AtSignIcon } from "@chakra-ui/icons";
+import { FooterProps, Station } from "../../types";
 
-function Footer(props) {
+const Footer: React.FC<FooterProps> = ({ callback }) => {
+    const [currentStation, setCurrentStation] = useState<string | null>(null);
+    const [selectedStation, setSelectedStation] = useState<string>("unselected");
+    const [, setError] = useState<string | null>(null);
 
-    const [currentStation, setCurrentStation] = useState(null);
-    const [selectedStation, setSelectedStation] = useState("unselected");
-    const [error, setError] = useState(null);
-
-    function stationMenuCallback(e) {
-        setCurrentStation(e.currentTarget.value);
-        props.callback(e.currentTarget.value);
-    }
-
-    function favStationCallback(station) {
+    const stationMenuCallback = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+        const station = e.currentTarget.value;
         setCurrentStation(station);
-        props.callback(station);
-    }
+        callback(station);
+    };
 
-    function getNearestStation(userLat, userLong, stations) {
-        let nearestStation = null;
+    const favStationCallback = (station: string): void => {
+        setCurrentStation(station);
+        callback(station);
+    };
+
+    const getNearestStation = (userLat: number, userLong: number, stations: { [key: string]: Station }): string | null => {
+        let nearestStation: string | null = null;
         let minDistance = Infinity;
 
-        function haversine(lat1, lon1, lat2, lon2) {
-            const toRad = (angle) => (angle * Math.PI) / 180;
+        const haversine = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
+            const toRad = (angle: number): number => (angle * Math.PI) / 180;
             const R = 6371; // Earth's radius in km
             const dLat = toRad(lat2 - lat1);
             const dLon = toRad(lon2 - lon1);
@@ -37,7 +38,7 @@ function Footer(props) {
                 Math.sin(dLon / 2) * Math.sin(dLon / 2);
             const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
             return R * c; // Distance in km
-        }
+        };
 
         for (const stationKey in stations) {
             const { lat, long } = stations[stationKey];
@@ -50,9 +51,9 @@ function Footer(props) {
         }
 
         return nearestStation;
-    }
+    };
 
-    function requestLocation() {
+    const requestLocation = (): void => {
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
@@ -61,7 +62,9 @@ function Footer(props) {
                         position.coords.longitude,
                         config.stationName
                     );
-                    favStationCallback(nearestStation);
+                    if (nearestStation) {
+                        favStationCallback(nearestStation);
+                    }
                 },
                 (err) => {
                     setError(err.message);
@@ -73,7 +76,7 @@ function Footer(props) {
         } else {
             setError("Geolocation not supported.");
         }
-    }
+    };
 
     useEffect(() => {
         if (currentStation) {
@@ -88,13 +91,13 @@ function Footer(props) {
                     <Circle>
                         <StationMenu callback={stationMenuCallback} selected={selectedStation} />
                     </Circle>
-                    <IconButton onClick={requestLocation} icon={<AtSignIcon />} />
+                    <IconButton onClick={requestLocation} icon={<AtSignIcon />} aria-label="Get location" />
                 </HStack>
             </VStack>
             <br/>
             <FavStations currentStation={currentStation} callback={favStationCallback} />
         </Box>
-    )
-}
+    );
+};
 
-export default Footer;
+export default Footer; 
