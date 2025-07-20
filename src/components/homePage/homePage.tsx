@@ -17,9 +17,7 @@ const HomePage: React.FC<HomePageProps> = () => {
 
     const tryFetchingEta = async (selectedStation: string): Promise<void> => {
         if (selectedStation !== "unselected") {
-            const query = process.env.REACT_APP_CORS_PROXY_API 
-                ? `${process.env.REACT_APP_CORS_PROXY_API}/${config.etaURL}?station_id=${selectedStation}` 
-                : `${config.etaURL}?station_id=${selectedStation}`;
+            const query = `${config.etaURL}?station_id=${selectedStation}`;
             
             try {
                 const response = await fetch(query);
