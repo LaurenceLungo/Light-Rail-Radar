@@ -13,6 +13,7 @@ export const translations: Translations = {
         removeFromBookmark: 'Remove Bookmark',
         autoUpdateMessage: (seconds: number) => `auto updated every ${seconds}s`,
         lineStopped: 'Line is stopped',
+        pleaseSelect: 'Please Select Light Rail Station',
     },
     zh: {
         platform: (platformNumber: string) => `${platformNumber}號月台`,
@@ -26,5 +27,6 @@ export const translations: Translations = {
         removeFromBookmark: '從書籤刪除',
         autoUpdateMessage: (seconds: number) => `每${seconds}秒自動更新`,
         lineStopped: '路線暫停服務',
+        pleaseSelect: '請選擇輕鐵站',
     }
 }; 

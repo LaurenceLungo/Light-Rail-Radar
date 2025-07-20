@@ -1,5 +1,3 @@
-import React from 'react';
-
 // Station and platform types
 export interface Station {
   name: string;
@@ -64,6 +62,7 @@ export interface TranslationStrings {
   removeFromBookmark: string;
   autoUpdateMessage: SecondsFunction;
   lineStopped: string;
+  pleaseSelect: string;
 }
 
 export interface Translations {

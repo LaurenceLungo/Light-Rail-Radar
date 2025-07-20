@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import './App.css';
-import HomePage from './components/homePage/homePage';
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "./theme";
 import { LanguageProvider } from './context/LanguageContext';
 import LanguageSelector from './components/languageSelector/languageSelector';
+
+const HomePage = lazy(() => import('./components/homePage/homePage'));
 
 const App: React.FC = () => {
   return (
@@ -12,7 +13,9 @@ const App: React.FC = () => {
       <LanguageProvider>
         <div className="App">
           <LanguageSelector />
-          <HomePage />
+          <Suspense fallback={<div>Loading...</div>}>
+            <HomePage />
+          </Suspense>
         </div>
       </LanguageProvider>
     </ChakraProvider>
