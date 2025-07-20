@@ -13,17 +13,15 @@ This progressive web app aims at providing the **quickest and easiest way possib
   <img src="https://github.com/LaurenceLungo/Light-Rail-Radar/blob/main/images/iPhone_UI.png" width="400" />
 </p>
 
-## Bootstrap
+## Tech Stack
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## UI Framework
-
-This project uses [Chakra UI](https://chakra-ui.com/) component library.
+- **Framework**: [React](https://reactjs.org/) 18 with [TypeScript](https://www.typescriptlang.org/)
+- **UI Library**: [Chakra UI](https://chakra-ui.com/)
+- **Bootstrap**: [Create React App](https://github.com/facebook/create-react-app)
+- **Package Manager**: [Yarn](https://classic.yarnpkg.com/en/docs/install)
+- **Language**: TypeScript for type safety and better development experience
 
 ## Getting Started
-
-To get started with building this project from scratch, follow these steps:
 
 ### Prerequisites
 
@@ -58,7 +56,7 @@ To start the development server, run the following command:
 yarn start
 ```
 
-This will run the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser. The page will reload if you make edits, and you will also see any lint errors in the console.
+This will run the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser. The page will reload if you make edits, and you will also see any TypeScript errors in the console.
 
 ### Running Tests
 
@@ -82,9 +80,17 @@ This will create an optimized build in the `build` folder. The build is minified
 
 For more information on deployment, see the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment).
 
+### Type Checking
+
+To run TypeScript type checking without building:
+
+```bash
+npx tsc --noEmit
+```
+
 ### Ejecting the App
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
 If you need to customize the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project:
 
@@ -92,34 +98,31 @@ If you need to customize the build tool and configuration choices, you can `ejec
 yarn eject
 ```
 
-This will copy all the configuration files and transitive dependencies (webpack, Babel, ESLint, etc.) into your project so you have full control over them. At this point, you’re on your own. You don’t have to ever use `eject`, but it’s available if needed.
+This will copy all the configuration files and transitive dependencies (webpack, Babel, ESLint, etc.) into your project so you have full control over them. At this point, you're on your own. You don't have to ever use `eject`, but it's available if needed.
 
-## Learn More
+## Project Structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+src/
+├── components/          # React components
+│   ├── footer/         # Footer components (station menu, favorites)
+│   ├── homePage/       # Main page component
+│   ├── languageSelector/ # Language toggle component
+│   ├── platformCard/   # Platform display component
+│   └── routeEntry/     # Route information component
+├── context/            # React context (language management)
+├── types/              # TypeScript type definitions
+├── translations/       # Internationalization files
+├── App.tsx            # Main app component
+├── index.tsx          # App entry point
+└── config.ts          # Application configuration
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Features
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Real-time ETA**: Live updates of Light Rail arrival times
+- **Multi-language Support**: English and Chinese (Traditional)
+- **Station Selection**: Easy station picker with favorites
+- **Location-based**: Automatic nearest station detection
+- **Progressive Web App**: Installable on mobile devices
+- **TypeScript**: Full type safety and better development experience
