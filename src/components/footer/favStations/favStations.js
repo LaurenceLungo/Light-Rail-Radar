@@ -18,7 +18,6 @@ function FavStations(props) {
 
     useEffect(() => {
         localStorage.setItem('favorites', JSON.stringify(favorites));
-        console.log('triggered localStorage update:', localStorage.getItem('favorites'))
     }, [favorites]);
 
     function addToFavHandler() {

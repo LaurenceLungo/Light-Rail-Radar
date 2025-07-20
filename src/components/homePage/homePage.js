@@ -37,7 +37,6 @@ function HomePage() {
     }, config.refreshInterval);
 
     function selectHandler(station) {
-        console.log('set', station)
         setStation(station);
     }
 
