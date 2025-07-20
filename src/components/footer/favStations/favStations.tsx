@@ -1,41 +1,44 @@
+import React, { useState, useEffect, useContext } from "react";
 import classes from "./favStations.module.css";
 import { Center, VStack, HStack, Button } from "@chakra-ui/react";
 import config from "../../../config";
-import { useState, useEffect, useContext } from "react";
 import { LanguageContext } from "../../../context/LanguageContext";
 import { translations } from "../../../translations/translations";
+import { FavStationsProps } from "../../../types";
 
-function FavStations(props) {
-    const { language } = useContext(LanguageContext);
+const FavStations: React.FC<FavStationsProps> = ({ currentStation, callback }) => {
+    const languageContext = useContext(LanguageContext);
+    const language = languageContext?.language || 'zh';
     const t = translations[language];
 
-    let iniValFavorites = [];
+    let iniValFavorites: string[] = [];
 
     if (localStorage.getItem('favorites') !== null) {
-        iniValFavorites = JSON.parse(localStorage.getItem('favorites'));
+        iniValFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
     }
-    const [favorites, setFavorites] = useState(iniValFavorites);
+    const [favorites, setFavorites] = useState<string[]>(iniValFavorites);
 
     useEffect(() => {
         localStorage.setItem('favorites', JSON.stringify(favorites));
-        console.log('triggered localStorage update:', localStorage.getItem('favorites'))
     }, [favorites]);
 
-    function addToFavHandler() {
-        if (!favorites.includes(props.currentStation) && props.currentStation !== null)
-            setFavorites(favorites => [...favorites, props.currentStation]);
-    }
+    const addToFavHandler = (): void => {
+        if (!favorites.includes(currentStation || '') && currentStation !== null) {
+            setFavorites(favorites => [...favorites, currentStation!]);
+        }
+    };
 
-    function delFromFavHandler() {
-        if (favorites.includes(props.currentStation) && props.currentStation !== null)
+    const delFromFavHandler = (): void => {
+        if (favorites.includes(currentStation || '') && currentStation !== null) {
             setFavorites(favorites => favorites.filter(value => {
-                return value !== props.currentStation;
+                return value !== currentStation;
             }));
-    }
+        }
+    };
 
-    function onClickFavHandler(station) {
-        props.callback(station);
-    }
+    const onClickFavHandler = (station: string): void => {
+        callback(station);
+    };
 
     return (
         <Center>
@@ -52,12 +55,12 @@ function FavStations(props) {
                     {favorites.map((station) => {
                         return <Button key={station} value={station} className={classes.btn} onClick={() => onClickFavHandler(station)}>
                             {config.stationName[station]["name"]}
-                        </Button>
+                        </Button>;
                     })}
                 </div>
             </VStack>
         </Center>
-    )
-}
+    );
+};
 
-export default FavStations;
+export default FavStations; 

@@ -1,12 +1,12 @@
-import classes from "./routeEntry.module.css";
+import React, { useContext } from "react";
 import { Tr, Td } from '@chakra-ui/react';
-import { useContext } from "react";
 import { LanguageContext } from "../../context/LanguageContext";
 import { translations } from "../../translations/translations";
+import { RouteEntryProps } from "../../types";
 
-function RouteEntry(props) {
-    const route = props.route;
-    const { language } = useContext(LanguageContext);
+const RouteEntry: React.FC<RouteEntryProps> = ({ route }) => {
+    const languageContext = useContext(LanguageContext);
+    const language = languageContext?.language || 'zh';
     const t = translations[language];
 
     // Check if the route is stopped due to typhoon
@@ -19,7 +19,7 @@ function RouteEntry(props) {
             <Td>{isStopped ? t.lineStopped : (language === 'zh' ? route.time_ch : route.time_en)}</Td>
             <Td>{route.train_length}</Td>
         </Tr>
-    )
-}
+    );
+};
 
-export default RouteEntry;
+export default RouteEntry; 

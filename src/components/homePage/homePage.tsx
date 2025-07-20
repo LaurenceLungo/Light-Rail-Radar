@@ -1,32 +1,38 @@
-import { useState, useEffect, useContext } from "react";
-import classes from "./homePage.module.css";
+import React, { useState, useEffect, useContext } from "react";
 import Footer from "../footer/footer";
 import PlatformCard from "../platformCard/platformCard";
 import config from "../../config";
 import { useInterval, Container, Text } from "@chakra-ui/react";
 import { LanguageContext } from "../../context/LanguageContext";
 import { translations } from "../../translations/translations";
+import { Platform, ETAResponse, HomePageProps } from "../../types";
 
-function HomePage() {
-    const [station, setStation] = useState("unselected");
-    const [platformList, setPlatformList] = useState([]);
-    const [lastUpdatedTime, setLastUpdatedTime] = useState("-");
-    const { language } = useContext(LanguageContext);
+const HomePage: React.FC<HomePageProps> = () => {
+    const [station, setStation] = useState<string>("unselected");
+    const [platformList, setPlatformList] = useState<Platform[]>([]);
+    const [lastUpdatedTime, setLastUpdatedTime] = useState<string>("-");
+    const languageContext = useContext(LanguageContext);
+    const language = languageContext?.language || 'zh';
     const t = translations[language];
 
-    function tryFetchingEta(selectedStation) {
+    const tryFetchingEta = async (selectedStation: string): Promise<void> => {
         if (selectedStation !== "unselected") {
-            const query = process.env.REACT_APP_CORS_PROXY_API ? `${process.env.REACT_APP_CORS_PROXY_API}/${config.etaURL}?station_id=${selectedStation}` : `${config.etaURL}?station_id=${selectedStation}`;
-            fetch(query).then(res => {
-                return res.json();
-            }).then(data => {
+            const query = process.env.REACT_APP_CORS_PROXY_API 
+                ? `${process.env.REACT_APP_CORS_PROXY_API}/${config.etaURL}?station_id=${selectedStation}` 
+                : `${config.etaURL}?station_id=${selectedStation}`;
+            
+            try {
+                const response = await fetch(query);
+                const data: ETAResponse = await response.json();
                 setPlatformList(data.platform_list);
                 // Extract time portion from system_time
                 const timeOnly = data.system_time.split(' ')[1];
                 setLastUpdatedTime(timeOnly);
-            });
+            } catch (error) {
+                console.error('Error fetching ETA data:', error);
+            }
         }
-    }
+    };
 
     useEffect(() => {
         tryFetchingEta(station);
@@ -36,10 +42,9 @@ function HomePage() {
         tryFetchingEta(station);
     }, config.refreshInterval);
 
-    function selectHandler(station) {
-        console.log('set', station)
+    const selectHandler = (station: string): void => {
         setStation(station);
-    }
+    };
 
     return (
         <div>
@@ -51,7 +56,7 @@ function HomePage() {
             {station !== "unselected" && (
                 <Container>
                     <Text fontSize='sm'>
-                        {t.updateTime}: {lastUpdatedTime} ({t.autoUpdateMessage(config.refreshIntervalSec)})
+                        {t.updateTime}: {lastUpdatedTime} ({t.autoUpdateMessage(parseInt(config.refreshIntervalSec))})
                     </Text>
                 </Container>
             )}
@@ -59,7 +64,7 @@ function HomePage() {
             <br />
             <Footer callback={selectHandler} />
         </div>
-    )
-}
+    );
+};
 
-export default HomePage;
+export default HomePage; 

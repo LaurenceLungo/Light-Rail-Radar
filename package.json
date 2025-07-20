@@ -17,6 +17,12 @@
     "workbox-routing": "^7.1.0",
     "workbox-strategies": "^7.1.0"
   },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "typescript": "^5.0.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

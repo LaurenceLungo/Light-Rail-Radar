@@ -6,7 +6,7 @@ import theme from "./theme";
 import { LanguageProvider } from './context/LanguageContext';
 import LanguageSelector from './components/languageSelector/languageSelector';
 
-function App() {
+const App: React.FC = () => {
   return (
     <ChakraProvider theme={theme}>
       <LanguageProvider>
@@ -17,6 +17,6 @@ function App() {
       </LanguageProvider>
     </ChakraProvider>
   );
-}
+};
 
-export default App;
+export default App; 
