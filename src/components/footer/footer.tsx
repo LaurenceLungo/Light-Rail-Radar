@@ -107,7 +107,7 @@ const Footer: React.FC<FooterProps> = ({ callback }) => {
                     <Circle>
                         <StationMenu callback={stationMenuCallback} selected={selectedStation} />
                     </Circle>
-                    <IconButton onClick={requestLocation} icon={<TargetIcon />} aria-label="Get location" />
+                    <IconButton onClick={requestLocation} icon={<TargetIcon boxSize={5} />} aria-label="Get location" fontSize="1.75rem" />
                 </HStack>
             </VStack>
             <br/>
