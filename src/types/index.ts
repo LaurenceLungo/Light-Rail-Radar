@@ -64,6 +64,12 @@ export interface TranslationStrings {
   removeFromBookmark: string;
   autoUpdateMessage: SecondsFunction;
   lineStopped: string;
+  pwaInstallTitle: string;
+  pwaInstallMessage: string;
+  pwaInstallButton: string;
+  pwaInstructionsTitle: string;
+  pwaInstructionsMessage: string;
+  pwaShareButton: string;
 }
 
 export interface Translations {
