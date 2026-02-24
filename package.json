@@ -19,6 +19,7 @@
     "source-map-explorer": "^2.5.3",
     "typescript": "^5.0.0",
     "vite": "^7.1.11",
+    "vite-plugin-pwa": "^1.2.0",
     "vite-plugin-svgr": "^4.3.0",
     "vite-tsconfig-paths": "^5.1.4"
   },
