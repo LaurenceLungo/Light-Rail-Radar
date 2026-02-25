@@ -28,8 +28,7 @@ const Footer: React.FC<FooterProps> = ({ callback }) => {
     const [selectedStation, setSelectedStation] = useState<string>("unselected");
     const [, setError] = useState<string | null>(null);
 
-    const stationMenuCallback = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-        const station = e.currentTarget.value;
+    const stationMenuCallback = (station: string): void => {
         setCurrentStation(station);
         callback(station);
     };
@@ -70,6 +69,9 @@ const Footer: React.FC<FooterProps> = ({ callback }) => {
     };
 
     const requestLocation = (): void => {
+        // Clear search input before getting location
+        window.dispatchEvent(new Event('clearStationSearch'));
+
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
