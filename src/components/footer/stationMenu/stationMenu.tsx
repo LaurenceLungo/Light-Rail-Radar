@@ -55,7 +55,7 @@ const StationMenu: React.FC<StationMenuProps> = ({ callback, selected }) => {
         }
         debounceRef.current = setTimeout(() => {
             setSearchTerm(value);
-        }, 100);
+        }, 300);
     }, []);
 
     useEffect(() => {
