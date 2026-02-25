@@ -22,9 +22,13 @@ const HomePage: React.FC<HomePageProps> = () => {
             try {
                 const response = await fetch(query);
                 const data: ETAResponse = await response.json();
-                setPlatformList(data.platform_list);
+                if (Array.isArray(data.platform_list)) {
+                    setPlatformList(data.platform_list);
+                } else {
+                    setPlatformList([]);
+                }
                 // Extract time portion from system_time
-                const timeOnly = data.system_time.split(' ')[1];
+                const timeOnly = data.system_time?.split(' ')[1] ?? "-";
                 setLastUpdatedTime(timeOnly);
             } catch (error) {
                 console.error('Error fetching ETA data:', error);
