@@ -37,6 +37,8 @@ const FavStations: React.FC<FavStationsProps> = ({ currentStation, callback }) =
     };
 
     const onClickFavHandler = (station: string): void => {
+        // ensure the search bar is cleared before changing the station
+        window.dispatchEvent(new Event('clearStationSearch'));
         callback(station);
     };
 

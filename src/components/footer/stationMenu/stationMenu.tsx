@@ -58,9 +58,25 @@ const StationMenu: React.FC<StationMenuProps> = ({ callback, selected }) => {
         }, 300);
     }, []);
 
+    // keep selected state in sync with prop
+    // (clearing of the search box is handled by explicit events so we don't erase
+    // the term when the component auto-selects the first filtered result)
     useEffect(() => {
         setSelected(selected);
     }, [selected]);
+
+    // listen for explicit clear events (e.g. location button pressed in Footer)
+    useEffect(() => {
+        const clearHandler = () => {
+            setInputValue("");
+            setSearchTerm("");
+            setHasUserInteracted(false);
+        };
+        window.addEventListener('clearStationSearch', clearHandler);
+        return () => {
+            window.removeEventListener('clearStationSearch', clearHandler);
+        };
+    }, []);
 
     return (
         <div className={classes.select}>
