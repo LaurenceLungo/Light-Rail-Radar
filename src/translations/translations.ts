@@ -14,6 +14,7 @@ export const translations: Translations = {
         autoUpdateMessage: (seconds: number) => `auto updated every ${seconds}s`,
         lineStopped: 'Line is stopped',
         pleaseSelect: 'Please Select Light Rail Station',
+        searchStation: 'Search station...',
     },
     zh: {
         platform: (platformNumber: string) => `${platformNumber}號月台`,
@@ -28,5 +29,6 @@ export const translations: Translations = {
         autoUpdateMessage: (seconds: number) => `每${seconds}秒自動更新`,
         lineStopped: '路線暫停服務',
         pleaseSelect: '請選擇輕鐵站',
+        searchStation: '搜尋車站...',
     }
 }; 

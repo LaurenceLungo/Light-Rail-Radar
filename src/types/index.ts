@@ -63,6 +63,7 @@ export interface TranslationStrings {
   autoUpdateMessage: SecondsFunction;
   lineStopped: string;
   pleaseSelect: string;
+  searchStation: string;
 }
 
 export interface Translations {
@@ -99,7 +100,7 @@ export interface FavStationsProps {
 }
 
 export interface StationMenuProps {
-  callback: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  callback: (station: string) => void;
   selected: string;
 }
 
