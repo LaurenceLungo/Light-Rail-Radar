@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Tr, Td } from '@chakra-ui/react';
+import { Table } from '@chakra-ui/react';
 import { LanguageContext } from "../../context/LanguageContext";
 import { translations } from "../../translations/translations";
 import { RouteEntryProps } from "../../types";
@@ -13,12 +13,12 @@ const RouteEntry: React.FC<RouteEntryProps> = ({ route }) => {
     const isStopped = route.stop === 1;
 
     return (
-        <Tr>
-            <Td>{route.route_no}</Td>
-            <Td>{language === 'zh' ? route.dest_ch : route.dest_en}</Td>
-            <Td>{isStopped ? t.lineStopped : (language === 'zh' ? route.time_ch : route.time_en)}</Td>
-            <Td>{route.train_length}</Td>
-        </Tr>
+        <Table.Row>
+            <Table.Cell>{route.route_no}</Table.Cell>
+            <Table.Cell>{language === 'zh' ? route.dest_ch : route.dest_en}</Table.Cell>
+            <Table.Cell>{isStopped ? t.lineStopped : (language === 'zh' ? route.time_ch : route.time_en)}</Table.Cell>
+            <Table.Cell>{route.train_length}</Table.Cell>
+        </Table.Row>
     );
 };
 
