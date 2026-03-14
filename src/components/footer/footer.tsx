@@ -1,27 +1,11 @@
 import React, { useState, useEffect } from "react";
 import classes from "./footer.module.css";
-import { Circle, Box, IconButton, HStack, VStack, Icon } from "@chakra-ui/react";
+import { Box, IconButton, HStack, VStack } from "@chakra-ui/react";
+import { LocateFixed } from "lucide-react";
 import StationMenu from "./stationMenu/stationMenu";
 import FavStations from "./favStations/favStations";
 import config from "../../config";
 import { FooterProps, Station } from "../../types";
-
-// Custom Location Pin Icon (inverted teardrop with circle hole)
-const TargetIcon = (props: any) => (
-  <Icon viewBox="0 0 24 24" {...props}>
-    <defs>
-      <mask id="hole">
-        <rect width="24" height="24" fill="white"/>
-        <circle cx="12" cy="9" r="2.5" fill="black"/>
-      </mask>
-    </defs>
-    <path
-      fill="currentColor"
-      d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
-      mask="url(#hole)"
-    />
-  </Icon>
-);
 
 const Footer: React.FC<FooterProps> = ({ callback }) => {
     const [currentStation, setCurrentStation] = useState<string | null>(null);
@@ -29,7 +13,12 @@ const Footer: React.FC<FooterProps> = ({ callback }) => {
     const [, setError] = useState<string | null>(null);
 
     const stationMenuCallback = (station: string): void => {
-        setCurrentStation(station);
+        if (station === "unselected") {
+            setCurrentStation(null);
+            setSelectedStation("unselected");
+        } else {
+            setCurrentStation(station);
+        }
         callback(station);
     };
 
@@ -71,6 +60,10 @@ const Footer: React.FC<FooterProps> = ({ callback }) => {
     const requestLocation = (): void => {
         // Clear search input before getting location
         window.dispatchEvent(new Event('clearStationSearch'));
+        // Reset so that if the same station is found again, the state change
+        // (null → station) still triggers the useEffect and re-selects it.
+        setCurrentStation(null);
+        setSelectedStation("unselected");
 
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(
@@ -104,12 +97,12 @@ const Footer: React.FC<FooterProps> = ({ callback }) => {
 
     return (
         <Box className={classes.footer}>
-            <VStack spacing={4}>
-                <HStack spacing={4}>
-                    <Circle>
-                        <StationMenu callback={stationMenuCallback} selected={selectedStation} />
-                    </Circle>
-                    <IconButton onClick={requestLocation} icon={<TargetIcon boxSize={5} />} aria-label="Get location" fontSize="1.75rem" />
+            <VStack gap={4}>
+                <HStack gap={4}>
+                    <StationMenu callback={stationMenuCallback} selected={selectedStation} />
+                    <IconButton onClick={requestLocation} aria-label="Get location" variant="subtle">
+                        <LocateFixed size={20} />
+                    </IconButton>
                 </HStack>
             </VStack>
             <br/>
