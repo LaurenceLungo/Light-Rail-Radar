@@ -50,7 +50,8 @@
     ]
   },
   "resolutions": {
-    "serialize-javascript": "^7.0.3"
+    "serialize-javascript": "^7.0.3",
+    "@babel/runtime": "^7.26.10"
   },
   "browserslist": {
     "production": [
