@@ -13,7 +13,7 @@ export const translations: Translations = {
         removeFromBookmark: 'Remove Bookmark',
         autoUpdateMessage: (seconds: number) => `auto updated every ${seconds}s`,
         lineStopped: 'Line is stopped',
-        pleaseSelect: 'Please Select Light Rail Station',
+        pleaseSelect: 'Please Select Station',
         searchStation: 'Search station...',
         locationError: 'Unable to access your location. Please go to Settings and enable location access.',
     },

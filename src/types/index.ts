@@ -114,5 +114,4 @@ export interface AppConfig {
   stationName: StationConfig;
   etaURL: string;
   refreshInterval: number;
-  refreshIntervalSec: string;
 } 

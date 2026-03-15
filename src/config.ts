@@ -73,8 +73,7 @@ const config: AppConfig = {
     "385": {"name": "洪天路緊急月台Hung Tin Road Emergency Platform", "zone": "緊急月台", "lat": 22.435830015177128, "long": 113.99971163751259}
 },
     etaURL: "https://rt.data.gov.hk/v1/transport/mtr/lrt/getSchedule",
-    refreshInterval: 15000,
-    refreshIntervalSec: "10"
+    refreshInterval: 10000
 };
 
 export default config; 

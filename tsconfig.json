@@ -4,7 +4,7 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "es6"
+      "es2016"
     ],
     "allowJs": true,
     "skipLibCheck": true,
@@ -14,12 +14,15 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": [
     "src"

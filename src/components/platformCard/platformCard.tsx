@@ -3,17 +3,7 @@ import classes from "./platformCard.module.css";
 import RouteEntry from "../routeEntry/routeEntry";
 import { LanguageContext } from "../../context/LanguageContext";
 import { translations } from "../../translations/translations";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  Text,
-  TableCaption,
-  TableContainer,
-} from '@chakra-ui/react';
+import { Table, Text } from '@chakra-ui/react';
 import { PlatformCardProps } from "../../types";
 
 const PlatformCard: React.FC<PlatformCardProps> = ({ platform }) => {
@@ -25,42 +15,38 @@ const PlatformCard: React.FC<PlatformCardProps> = ({ platform }) => {
 
   if (!route_list) {
     return (
-      <TableContainer>
-        <Table variant='simple' size='sm'>
-          <TableCaption placement='top'>{t.platform(platform_id)}</TableCaption>
-          <Tbody>
-            <Tr>
-              <Td>
-                <Text className={classes.endOfServiceNotice}>
-                  {t.endOfService}
-                </Text>
-              </Td>
-            </Tr>
-          </Tbody>
-        </Table>
-      </TableContainer>
+      <Table.Root size='sm'>
+        <Table.Caption captionSide='top'>{t.platform(platform_id)}</Table.Caption>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell>
+              <Text className={classes.endOfServiceNotice}>
+                {t.endOfService}
+              </Text>
+            </Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table.Root>
     );
   }
   
   return (
-    <TableContainer>
-      <Table variant='simple' size='sm'>
-        <TableCaption placement='top'>{t.platform(platform_id)}</TableCaption>
-        <Thead>
-          <Tr>
-            <Th>{t.route}</Th>
-            <Th>{t.direction}</Th>
-            <Th>{t.arrivalTime}</Th>
-            <Th>{t.cars}</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {route_list.map((route, idx) => (
-            <RouteEntry key={idx} route={route} />
-          ))}
-        </Tbody>
-      </Table>
-    </TableContainer>
+  <Table.Root size='sm'>
+      <Table.Caption fontSize="xs" fontWeight="bold" captionSide='top'>{t.platform(platform_id)}</Table.Caption>
+      <Table.Header>
+        <Table.Row>
+          <Table.ColumnHeader fontSize="xs" fontWeight="bold" color='fg.muted'>{t.route}</Table.ColumnHeader>
+          <Table.ColumnHeader fontSize="xs" fontWeight="bold" color='fg.muted'>{t.direction}</Table.ColumnHeader>
+          <Table.ColumnHeader fontSize="xs" fontWeight="bold" color='fg.muted'>{t.arrivalTime}</Table.ColumnHeader>
+          <Table.ColumnHeader fontSize="xs" fontWeight="bold" color='fg.muted'>{t.cars}</Table.ColumnHeader>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {route_list.map((route, idx) => (
+          <RouteEntry key={idx} route={route} />
+        ))}
+      </Table.Body>
+    </Table.Root>
   );
 };
 
