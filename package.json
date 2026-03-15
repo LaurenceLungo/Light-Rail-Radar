@@ -49,6 +49,9 @@
       "react-app/jest"
     ]
   },
+  "resolutions": {
+    "serialize-javascript": "^7.0.3"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
