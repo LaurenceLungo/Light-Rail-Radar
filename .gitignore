@@ -25,3 +25,5 @@ yarn-error.log*
 app.yaml
 .vscode/*
 .claude/*
+playwright-report/index.html
+.gitignore
