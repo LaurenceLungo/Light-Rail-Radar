@@ -26,7 +26,6 @@ const TargetIcon = (props: any) => (
 const Footer: React.FC<FooterProps> = ({ callback }) => {
     const [currentStation, setCurrentStation] = useState<string | null>(null);
     const [selectedStation, setSelectedStation] = useState<string>("unselected");
-    const [, setError] = useState<string | null>(null);
 
     const stationMenuCallback = (station: string): void => {
         setCurrentStation(station);
@@ -68,10 +67,7 @@ const Footer: React.FC<FooterProps> = ({ callback }) => {
         return nearestStation;
     };
 
-    const requestLocation = (): void => {
-        // Clear search input before getting location
-        window.dispatchEvent(new Event('clearStationSearch'));
-
+    const selectNearestStation = (): void => {
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
@@ -84,17 +80,24 @@ const Footer: React.FC<FooterProps> = ({ callback }) => {
                         favStationCallback(nearestStation);
                     }
                 },
-                (err) => {
-                    setError(err.message);
-                    if (err.code === 1) {
-                        alert("無法存取你的定位，請到「設定」開啟定位及允許存取。");
-                    }
+                () => {
+                    // Fail silently if location access is denied or unavailable
                 }
             );
-        } else {
-            setError("Geolocation not supported.");
         }
     };
+
+    const requestLocation = (): void => {
+        // Clear search input before getting location
+        window.dispatchEvent(new Event('clearStationSearch'));
+        selectNearestStation();
+    };
+
+    // Auto-select nearest station on app launch; fail silently if denied
+    useEffect(() => {
+        selectNearestStation();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
         if (currentStation) {
