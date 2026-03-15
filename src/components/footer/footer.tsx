@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import classes from "./footer.module.css";
 import { Circle, Box, IconButton, HStack, VStack, Icon } from "@chakra-ui/react";
 import StationMenu from "./stationMenu/stationMenu";
 import FavStations from "./favStations/favStations";
 import config from "../../config";
 import { FooterProps, Station } from "../../types";
+import { LanguageContext } from "../../context/LanguageContext";
+import { translations } from "../../translations/translations";
 
 // Custom Location Pin Icon (inverted teardrop with circle hole)
 const TargetIcon = (props: any) => (
@@ -26,6 +28,9 @@ const TargetIcon = (props: any) => (
 const Footer: React.FC<FooterProps> = ({ callback }) => {
     const [currentStation, setCurrentStation] = useState<string | null>(null);
     const [selectedStation, setSelectedStation] = useState<string>("unselected");
+    const languageContext = useContext(LanguageContext);
+    const language = languageContext?.language || 'zh';
+    const t = translations[language];
 
     const stationMenuCallback = (station: string): void => {
         setCurrentStation(station);
@@ -67,7 +72,7 @@ const Footer: React.FC<FooterProps> = ({ callback }) => {
         return nearestStation;
     };
 
-    const selectNearestStation = (): void => {
+    const selectNearestStation = (silent: boolean): void => {
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
@@ -81,7 +86,9 @@ const Footer: React.FC<FooterProps> = ({ callback }) => {
                     }
                 },
                 () => {
-                    // Fail silently if location access is denied or unavailable
+                    if (!silent) {
+                        alert(t.locationError);
+                    }
                 }
             );
         }
@@ -90,12 +97,12 @@ const Footer: React.FC<FooterProps> = ({ callback }) => {
     const requestLocation = (): void => {
         // Clear search input before getting location
         window.dispatchEvent(new Event('clearStationSearch'));
-        selectNearestStation();
+        selectNearestStation(false);
     };
 
     // Auto-select nearest station on app launch; fail silently if denied
     useEffect(() => {
-        selectNearestStation();
+        selectNearestStation(true);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
