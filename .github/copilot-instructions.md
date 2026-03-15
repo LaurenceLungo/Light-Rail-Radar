@@ -14,6 +14,9 @@ Hong Kong Light Rail PWA — shows real-time ETA per platform at each station, f
 yarn dev        # dev server at http://localhost:5173
 yarn build      # production build → dist/
 npx tsc --noEmit # type check
+yarn test       # run all tests once
+yarn test:watch # run tests in watch mode
+yarn test:coverage # run tests with coverage report
 ```
 
 ## Key Files
