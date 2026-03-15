@@ -88,25 +88,43 @@ npx tsc --noEmit
 
 ### Running Tests
 
-Run the full test suite once:
+Run the unit tests (Vitest):
 
 ```bash
 yarn test
 ```
 
-Run tests in watch mode during development:
+Run unit tests in watch mode:
 
 ```bash
 yarn test:watch
 ```
 
-Run tests with a coverage report:
+Run unit tests with coverage report:
 
 ```bash
 yarn test:coverage
 ```
 
-Tests are located alongside their source files (`*.test.ts` / `*.test.tsx`) and in `src/test/` for shared utilities.
+Run end-to-end tests (Playwright):
+
+```bash
+yarn test:e2e
+```
+
+Run e2e tests in headed mode (browser window):
+
+```bash
+yarn test:e2e:headed
+```
+
+Run the Playwright test runner UI (interactive):
+
+```bash
+yarn test:e2e:ui
+```
+
+Tests are located alongside their source files (`*.test.ts` / `*.test.tsx`), in `src/test/` for shared utilities, and in `e2e/` for Playwright tests.
 
 ## Deployment (Netlify)
 
