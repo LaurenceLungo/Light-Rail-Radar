@@ -46,5 +46,5 @@ npx tsc --noEmit # type check
 - Station names are bilingual strings e.g. `"蝴蝶Butterfly"` — no separate zh/en fields
 - `clearStationSearch` window event resets the combobox (dispatched by geolocation button)
 - Chakra v3 uses `Combobox`, `useListCollection`, `useFilter` from `@chakra-ui/react`
+- After each change, update README.md if necessary
 - After significant changes to the codebase, update this file to reflect the new state
-
