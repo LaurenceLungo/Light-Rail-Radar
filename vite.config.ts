@@ -10,6 +10,7 @@ export default defineConfig({
     globals: true,
     setupFiles: ['./src/test/setup.ts'],
     css: true,
+    exclude: ['**/node_modules/**', 'e2e/**'],
   },
   plugins: [
     react(),
