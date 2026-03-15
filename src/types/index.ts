@@ -64,6 +64,7 @@ export interface TranslationStrings {
   lineStopped: string;
   pleaseSelect: string;
   searchStation: string;
+  locationError: string;
 }
 
 export interface Translations {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import classes from "./footer.module.css";
 import { Box, IconButton, HStack, VStack } from "@chakra-ui/react";
 import { LocateFixed } from "lucide-react";
@@ -6,11 +6,15 @@ import StationMenu from "./stationMenu/stationMenu";
 import FavStations from "./favStations/favStations";
 import config from "../../config";
 import { FooterProps, Station } from "../../types";
+import { LanguageContext } from "../../context/LanguageContext";
+import { translations } from "../../translations/translations";
 
 const Footer: React.FC<FooterProps> = ({ callback }) => {
     const [currentStation, setCurrentStation] = useState<string | null>(null);
     const [selectedStation, setSelectedStation] = useState<string>("unselected");
-    const [, setError] = useState<string | null>(null);
+    const languageContext = useContext(LanguageContext);
+    const language = languageContext?.language || 'zh';
+    const t = translations[language];
 
     const stationMenuCallback = (station: string): void => {
         if (station === "unselected") {
@@ -57,14 +61,7 @@ const Footer: React.FC<FooterProps> = ({ callback }) => {
         return nearestStation;
     };
 
-    const requestLocation = (): void => {
-        // Clear search input before getting location
-        window.dispatchEvent(new Event('clearStationSearch'));
-        // Reset so that if the same station is found again, the state change
-        // (null → station) still triggers the useEffect and re-selects it.
-        setCurrentStation(null);
-        setSelectedStation("unselected");
-
+    const selectNearestStation = (silent: boolean): void => {
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
@@ -77,17 +74,30 @@ const Footer: React.FC<FooterProps> = ({ callback }) => {
                         favStationCallback(nearestStation);
                     }
                 },
-                (err) => {
-                    setError(err.message);
-                    if (err.code === 1) {
-                        alert("無法存取你的定位，請到「設定」開啟定位及允許存取。");
+                () => {
+                    if (!silent) {
+                        alert(t.locationError);
                     }
                 }
             );
-        } else {
-            setError("Geolocation not supported.");
         }
     };
+
+    const requestLocation = (): void => {
+        // Clear search input before getting location
+        window.dispatchEvent(new Event('clearStationSearch'));
+        // Reset so that if the same station is found again, the state change
+        // (null → station) still triggers the useEffect and re-selects it.
+        setCurrentStation(null);
+        setSelectedStation("unselected");
+        selectNearestStation(false);
+    };
+
+    // Auto-select nearest station on app launch; fail silently if denied
+    useEffect(() => {
+        selectNearestStation(true);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
         if (currentStation) {

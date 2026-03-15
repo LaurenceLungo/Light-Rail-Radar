@@ -15,6 +15,7 @@ export const translations: Translations = {
         lineStopped: 'Line is stopped',
         pleaseSelect: 'Please Select Station',
         searchStation: 'Search station...',
+        locationError: 'Unable to access your location. Please go to Settings and enable location access.',
     },
     zh: {
         platform: (platformNumber: string) => `${platformNumber}號月台`,
@@ -30,5 +31,6 @@ export const translations: Translations = {
         lineStopped: '路線暫停服務',
         pleaseSelect: '請選擇輕鐵站',
         searchStation: '搜尋車站...',
+        locationError: '無法存取你的定位，請到「設定」開啟定位及允許存取。',
     }
 }; 
