@@ -86,6 +86,28 @@ To run TypeScript type checking without building:
 npx tsc --noEmit
 ```
 
+### Running Tests
+
+Run the full test suite once:
+
+```bash
+yarn test
+```
+
+Run tests in watch mode during development:
+
+```bash
+yarn test:watch
+```
+
+Run tests with a coverage report:
+
+```bash
+yarn test:coverage
+```
+
+Tests are located alongside their source files (`*.test.ts` / `*.test.tsx`) and in `src/test/` for shared utilities.
+
 ## Deployment (Netlify)
 
 To deploy on Netlify, use the following settings:
@@ -108,6 +130,7 @@ src/
 │   ├── platformCard/
 │   └── routeEntry/
 ├── context/
+├── test/
 ├── types/
 ├── translations/
 ```
