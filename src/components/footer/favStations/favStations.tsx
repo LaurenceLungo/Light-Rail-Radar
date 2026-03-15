@@ -44,18 +44,18 @@ const FavStations: React.FC<FavStationsProps> = ({ currentStation, callback }) =
 
     return (
         <Center>
-            <VStack spacing={4}>
-                <HStack spacing={4}>
-                    <Button variant="outline" colorScheme="blue" onClick={addToFavHandler} >
+            <VStack gap={4}>
+                <HStack gap={4}>
+                    <Button variant="outline" colorPalette="blue" onClick={addToFavHandler} >
                         {t.addToBookmark}
                     </Button>
-                    <Button variant="outline" colorScheme="red" onClick={delFromFavHandler} >
+                    <Button variant="outline" colorPalette="pink" onClick={delFromFavHandler} >
                         {t.removeFromBookmark}
                     </Button>
                 </HStack>
                 <div>
                     {favorites.map((station) => {
-                        return <Button key={station} value={station} className={classes.btn} onClick={() => onClickFavHandler(station)}>
+                        return <Button key={station} value={station} variant="subtle" className={classes.btn} onClick={() => onClickFavHandler(station)}>
                             {config.stationName[station]["name"]}
                         </Button>;
                     })}

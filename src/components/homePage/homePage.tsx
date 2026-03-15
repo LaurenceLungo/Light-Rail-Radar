@@ -1,9 +1,18 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import Footer from "../footer/footer";
 import PlatformCard from "../platformCard/platformCard";
 import config from "../../config";
-import { useInterval, Container, Text } from "@chakra-ui/react";
+import { Container, Text, Box } from "@chakra-ui/react";
 import { LanguageContext } from "../../context/LanguageContext";
+
+function useInterval(callback: () => void, delay: number) {
+    const savedCallback = useRef(callback);
+    useEffect(() => { savedCallback.current = callback; }, [callback]);
+    useEffect(() => {
+        const id = setInterval(() => savedCallback.current(), delay);
+        return () => clearInterval(id);
+    }, [delay]);
+}
 import { translations } from "../../translations/translations";
 import { Platform, ETAResponse, HomePageProps } from "../../types";
 
@@ -16,23 +25,26 @@ const HomePage: React.FC<HomePageProps> = () => {
     const t = translations[language];
 
     const tryFetchingEta = async (selectedStation: string): Promise<void> => {
-        if (selectedStation !== "unselected") {
-            const query = `${config.etaURL}?station_id=${selectedStation}`;
-            
-            try {
-                const response = await fetch(query);
-                const data: ETAResponse = await response.json();
-                if (Array.isArray(data.platform_list)) {
-                    setPlatformList(data.platform_list);
-                } else {
-                    setPlatformList([]);
-                }
-                // Extract time portion from system_time
-                const timeOnly = data.system_time?.split(' ')[1] ?? "-";
-                setLastUpdatedTime(timeOnly);
-            } catch (error) {
-                console.error('Error fetching ETA data:', error);
+        if (selectedStation === "unselected") {
+            setPlatformList([]);
+            setLastUpdatedTime("-");
+            return;
+        }
+        const query = `${config.etaURL}?station_id=${selectedStation}`;
+        
+        try {
+            const response = await fetch(query);
+            const data: ETAResponse = await response.json();
+            if (Array.isArray(data.platform_list)) {
+                setPlatformList(data.platform_list);
+            } else {
+                setPlatformList([]);
             }
+            // Extract time portion from system_time
+            const timeOnly = data.system_time?.split(' ')[1] ?? "-";
+            setLastUpdatedTime(timeOnly);
+        } catch (error) {
+            console.error('Error fetching ETA data:', error);
         }
     };
 
@@ -51,14 +63,16 @@ const HomePage: React.FC<HomePageProps> = () => {
     return (
         <div>
             <br />
-            {platformList.map((val) =>
-                <PlatformCard key={val.platform_id} platform={val} />
-            )}
             <br />
+            {platformList.map((val) =>
+                <Box key={val.platform_id} mb={6}>
+                    <PlatformCard platform={val} />
+                </Box>
+            )}
             {station !== "unselected" && (
                 <Container>
                     <Text fontSize='sm'>
-                        {t.updateTime}: {lastUpdatedTime} ({t.autoUpdateMessage(parseInt(config.refreshIntervalSec))})
+                        {t.updateTime}: {lastUpdatedTime} ({t.autoUpdateMessage(config.refreshInterval / 1000)})
                     </Text>
                 </Container>
             )}
