@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, useCallback } from "react";
 import { IconButton, Flex } from "@chakra-ui/react";
-import { Languages, ListCollapse } from "lucide-react";
+import { Languages, ListChevronsUpDown, ListChevronsDownUp } from "lucide-react";
 import { ColorModeButton } from "../ui/color-mode";
 import { LanguageContext } from "../../context/LanguageContext";
 import { ExpandedContext } from "../../context/ExpandedContext";
@@ -49,7 +49,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = () => {
                     onClick={() => setExpanded(!expanded)}
                     style={{ opacity: opacity, transition: 'opacity 0.2s' }}
                 >
-                    <ListCollapse size={18} />
+                    {expanded ? <ListChevronsDownUp size={18} /> : <ListChevronsUpDown size={18} />}
                 </IconButton>
             </Flex>
             <Flex 
