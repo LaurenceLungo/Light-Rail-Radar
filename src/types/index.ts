@@ -114,4 +114,15 @@ export interface AppConfig {
   stationName: StationConfig;
   etaURL: string;
   refreshInterval: number;
+  maxRows: number;
+}
+
+// Expanded context types
+export interface ExpandedContextType {
+  expanded: boolean;
+  setExpanded: (expanded: boolean) => void;
+}
+
+export interface ExpandedProviderProps {
+  children: React.ReactNode;
 } 

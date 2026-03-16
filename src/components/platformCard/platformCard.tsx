@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import classes from "./platformCard.module.css";
 import RouteEntry from "../routeEntry/routeEntry";
 import { LanguageContext } from "../../context/LanguageContext";
+import { ExpandedContext } from "../../context/ExpandedContext";
 import { translations } from "../../translations/translations";
 import { Table, Text } from '@chakra-ui/react';
 import { PlatformCardProps } from "../../types";
+import config from "../../config";
 
 const PlatformCard: React.FC<PlatformCardProps> = ({ platform }) => {
   const route_list = platform.route_list;
@@ -12,6 +14,8 @@ const PlatformCard: React.FC<PlatformCardProps> = ({ platform }) => {
   const languageContext = useContext(LanguageContext);
   const language = languageContext?.language || 'zh';
   const t = translations[language];
+  const expandedContext = useContext(ExpandedContext);
+  const expanded = expandedContext?.expanded ?? false;
 
   if (!route_list) {
     return (
@@ -42,7 +46,7 @@ const PlatformCard: React.FC<PlatformCardProps> = ({ platform }) => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {route_list.map((route, idx) => (
+        {(expanded ? route_list : route_list.slice(0, config.maxRows)).map((route, idx) => (
           <RouteEntry key={idx} route={route} />
         ))}
       </Table.Body>

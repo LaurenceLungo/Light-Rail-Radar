@@ -91,4 +91,38 @@ describe('PlatformCard', () => {
             expect(screen.queryByText('-End of Service-')).not.toBeInTheDocument();
         });
     });
+
+    describe('row limit (maxRows)', () => {
+        const makeRoutes = (count: number): Route[] =>
+            Array.from({ length: count }, (_, i) => ({
+                ...sampleRoute,
+                route_id: `r${i}`,
+                route_no: `${600 + i}`,
+            }));
+
+        it('shows at most maxRows rows when not expanded', () => {
+            const platform: Platform = {
+                platform_id: '3',
+                platform_name: 'Platform 3',
+                route_list: makeRoutes(6),
+            };
+            renderWithProviders(<PlatformCard platform={platform} />, { language: 'en', expanded: false });
+            // config.maxRows is 4 — only first 4 routes should appear
+            expect(screen.getByText('600')).toBeInTheDocument();
+            expect(screen.getByText('603')).toBeInTheDocument();
+            expect(screen.queryByText('604')).not.toBeInTheDocument();
+            expect(screen.queryByText('605')).not.toBeInTheDocument();
+        });
+
+        it('shows all rows when expanded', () => {
+            const platform: Platform = {
+                platform_id: '3',
+                platform_name: 'Platform 3',
+                route_list: makeRoutes(6),
+            };
+            renderWithProviders(<PlatformCard platform={platform} />, { language: 'en', expanded: true });
+            expect(screen.getByText('600')).toBeInTheDocument();
+            expect(screen.getByText('605')).toBeInTheDocument();
+        });
+    });
 });
