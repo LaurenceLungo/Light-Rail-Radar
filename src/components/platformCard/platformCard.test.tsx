@@ -107,10 +107,10 @@ describe('PlatformCard', () => {
                 route_list: makeRoutes(6),
             };
             renderWithProviders(<PlatformCard platform={platform} />, { language: 'en', expanded: false });
-            // config.maxRows is 4 — only first 4 routes should appear
+            // config.maxRows is 3 — only first 3 routes should appear
             expect(screen.getByText('600')).toBeInTheDocument();
-            expect(screen.getByText('603')).toBeInTheDocument();
-            expect(screen.queryByText('604')).not.toBeInTheDocument();
+            expect(screen.getByText('602')).toBeInTheDocument();
+            expect(screen.queryByText('603')).not.toBeInTheDocument();
             expect(screen.queryByText('605')).not.toBeInTheDocument();
         });
 
