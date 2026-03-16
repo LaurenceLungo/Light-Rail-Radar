@@ -74,7 +74,7 @@ const config: AppConfig = {
 },
     etaURL: "https://rt.data.gov.hk/v1/transport/mtr/lrt/getSchedule",
     refreshInterval: 10000,
-    maxRows: 4
+    maxRows: 3
 };
 
 export default config; 
