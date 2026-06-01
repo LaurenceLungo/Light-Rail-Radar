@@ -29,7 +29,7 @@
     "vite-plugin-pwa": "^1.2.0",
     "vite-plugin-svgr": "^4.3.0",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "3"
+    "vitest": "4"
   },
   "scripts": {
     "dev": "vite",
